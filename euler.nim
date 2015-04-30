@@ -134,5 +134,14 @@ problem 6:
         sum += i
         squareSum += toInt(pow(toFloat(i), 2.0))
     return $(toInt(pow(toFloat(sum), 2.0)) - squareSum)
+    
+# Find the 10001st prime - very easy with primesThrough already written
+# SOLVED
+problem 7:
+    var i = 0
+    for n in primesThrough(200000):
+        i += 1
+        if i == 10001:
+            return $n
 
 main()
