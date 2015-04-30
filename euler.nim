@@ -1,6 +1,6 @@
 from os import commandLineParams
 from parseutils import parseInt
-from math import sqrt, floor
+from math import sqrt, floor, pow
 from sequtils import newSeqWith, toSeq, foldl
 from times import cpuTime
 
@@ -101,14 +101,12 @@ problem 3:
 # two three-digit numbers.
 # SOLVED
 problem 4:
-    var s: string
-    var slen, palindrome: int
-    var palindromic = true
+    var palindrome: int
     for i in 100..999:
         for j in 100..999:
-            s = $(i*j)
-            slen = s.len
-            palindromic = true
+            let s = $(i*j)
+            let slen = s.len
+            var palindromic = true
             for c in 0..toInt(floor(slen / 2)):
                 if s[c] != s[slen - (c+1)]:
                     palindromic = false
@@ -127,5 +125,14 @@ problem 5:
     while foldl(factors, a + (lcm mod b)) != 0:
         lcm += 2520
     return $lcm
+    
+# Find the difference between square(sum(1..100)) and sum(square(1..100))
+# SOLVED
+problem 6:
+    var sum, squareSum: int
+    for i in 1..100:
+        sum += i
+        squareSum += toInt(pow(toFloat(i), 2.0))
+    return $(toInt(pow(toFloat(sum), 2.0)) - squareSum)
 
 main()
