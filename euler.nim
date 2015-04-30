@@ -2,6 +2,7 @@ from os import commandLineParams
 from parseutils import parseInt
 from math import sqrt, floor
 from sequtils import newSeqWith, toSeq, foldl
+from times import cpuTime
 
 # Dispatch table for problem functions,
 # used to support command-line parameters
@@ -13,7 +14,8 @@ proc main() =
         var num = 0
         discard parseInt(arg, num)
         if num-1 >= problems.low() and num-1 <= problems.high():
-            echo($num, " : ", problems[num-1]())
+            var startTime = cpuTime()
+            echo("\t\t", $num, " : ", problems[num - 1](), " in ", (cpuTime() - startTime) * 1000, "ms")
         else:
             echo("\"", arg, "\" is not a valid argument.")
 
@@ -25,7 +27,7 @@ template problem(i: expr, body: stmt): stmt {.immediate.} =
         body, i-1)
 
 ##
-## Helper/utility things
+## Helper functions for use in the problems
 ##
 
 # Unbounded iteration over fibonacci numbers
@@ -119,8 +121,7 @@ problem 4:
 # LCM of 1..10, so we just need to find the LCM of 2520 with 11..20
 # SOLVED
 problem 5:
-    # note: start factors with 0 to get around the lack of initial value
-    # parameter in foldl
+    # note: start factors with 0 to get around the lack of initial value parameter in foldl
     let factors = @[0, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     var lcm = 2520
     while foldl(factors, a + (lcm mod b)) != 0:
