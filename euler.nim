@@ -200,7 +200,10 @@ problem 10:
         sum += i
     return $sum
 
+# Find the greatest product of four adjacent numbers in the same direction in the grid below.
+# SOLVED
 problem 11:
+    var maxProd = 0
     let gridString = """
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -229,8 +232,17 @@ problem 11:
             var pInt : int
             discard parseInt(t[0], pInt)
             grid.add(pInt)
-    for n in grid:
-
-    return "hi"
+    # Examine the seq by iterating over all possible rows/diagonals/columns.
+    # In order to make the code concise, most numeric values are hardcoded.
+    # If the grid was of variable size, I should move the steps into variables.
+    for x in 0..16:
+        for y in countup(0, 380, 20):
+            let i = x + y # the starting point of the row/diag/col to be checked
+            if x <= 16:
+                maxProd = max(maxProd, grid[i] * grid[i+1] * grid[i+2] * grid[i+3]) # Try the row
+                if y <= 320: maxProd = max(maxProd, grid[i] * grid[i+21] * grid[i+42] * grid[i+63]) # Try the backward diagonal \
+                if y >= 60: maxProd = max(maxProd, grid[i] * grid[i-19] * grid[i-38] * grid[i-57]) # Try the forward diagonal /
+            if y <= 320: maxProd = max(maxProd, grid[i] * grid[i+20] * grid[i+40] * grid[i+60]) # Try the column
+    return $maxProd
             
 main()
