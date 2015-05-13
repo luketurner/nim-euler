@@ -1,11 +1,8 @@
 src = $(wildcard *.nim)
-out = $(src:%.nim=%)
 
-build: $(out)
-
-%: %.nim
-	nim compile $^
+build: $(src)
+	nim compile euler.nim
 
 .PHONY: clean
 clean:
-	rm -r nimcache $(out)
+	rm -r nimcache euler
