@@ -25,8 +25,8 @@ problem 2:
 # Method: Iterate over all factors and check primality (naive)
 problem 3:
     var maxPrime = 1
-    for i in 1..toInt(math.floor(math.sqrt(600851475143.0))):
-        if 600851475143 mod i == 0 and isPrime(i):
+    for i in 1..600851475143.0.sqrt.floor.toInt:
+        if 600851475143 mod i == 0 and i.isPrime:
             maxPrime = i
     return $maxPrime
 
@@ -43,7 +43,7 @@ problem 4:
             let s = $(i*j)
             let slen = s.len
             var palindromic = true
-            for c in 0..toInt(floor(slen / 2)):
+            for c in 0..(slen / 2).floor.toInt:
                 if s[c] != s[slen - (c+1)]:
                     palindromic = false
             if palindromic:
@@ -69,8 +69,8 @@ problem 6:
     var sum, squareSum: int
     for i in 1..100:
         sum += i
-        squareSum += toInt(math.pow(toFloat(i), 2.0))
-    return $(toInt(math.pow(toFloat(sum), 2.0)) - squareSum)
+        squareSum += i.toFloat.pow(2.0).toInt
+    return $(sum.toFloat.pow(2.0).toInt - squareSum)
     
 # Find the 10001st prime
 # SOLVED
@@ -91,7 +91,7 @@ problem 8:
     for i in 0..(bignum.len - 13):
         product = 1
         for j in 0..12:
-            product *= ord(bignum[i+j]) - 48 # character code math probably faster than parseInt
+            product *= bignum[i+j].ord - 48 # character code math probably faster than parseInt
         if product > maxProduct:
             maxProduct = product
     return $maxProduct

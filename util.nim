@@ -31,7 +31,7 @@ template slurpAsset*(fname: string): string =
     slurp("./assets/" & fname)
 
 ## Performs an integer root
-proc intSqrt*(x: int): int = toInt(floor(sqrt(toFloat(x))))
+proc intSqrt*(x: int): int = x.toFloat.sqrt.floor.toInt
 
 iterator factors*(x: int): int =
     ## Iterates over all factors of a given integer (NOT necessarily ordered)
@@ -65,7 +65,7 @@ iterator primesThrough*(max: int): int =
 
 proc isPrime*(x: int): bool =
     ## Checks the primality of x
-    for i in primesThrough(intSqrt(x)):
+    for i in x.intSqrt.primesThrough:
         if x mod i == 0:
             return false
     return true

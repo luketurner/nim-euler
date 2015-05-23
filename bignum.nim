@@ -20,7 +20,7 @@ proc carry(leaves: var seq[int], leafMax: int) =
             leaves[i] = leaf mod leafMax
             if i == leaves.high:
                 leaves.add(0)
-            leaves[i+1] += (leaf / leafMax).floor().toInt()
+            leaves[i+1] += (leaf / leafMax).floor.toInt
 
 proc `+`*(a: Bignum, b: int): Bignum =
     ## Adds an int and a bignum together.
@@ -59,7 +59,7 @@ proc toBignum*(n: int, leafLength: int = 7): Bignum =
     ## Creates a bignum from a starting integer. Optionally allows you to
     ## specify a custom leafLength, which indicates how many digits are
     ## stored in each leaf.
-    let leafMax = 10.0.pow(leafLength.toFloat()).toInt()
+    let leafMax = 10.0.pow(leafLength.toFloat).toInt
     var result: Bignum = (leafMax, newSeq[int]())
     result += n
     return result

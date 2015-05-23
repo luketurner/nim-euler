@@ -6,9 +6,9 @@ problem 11:
     const gridString = util.slurpAsset("p11.txt")
     # parse string into a seq
     var grid = newSeq[int]()
-    for t in str.tokenize(gridString):
+    for t in gridString.tokenize:
         if not t[1]:
-            grid.add(str.parseInt(t[0]))
+            grid.add(t[0].parseInt)
     # Examine the seq by iterating over all possible rows/diagonals/columns.
     # In order to make the code concise, most numeric values are hardcoded.
     # If the grid was of variable size, I should move the steps into variables.
@@ -30,7 +30,7 @@ problem 12:
     var summand = 1
     while true:
         var nFactors = 0
-        for fac in num.factors():
+        for fac in num.factors:
             nFactors += 1
         if nFactors > 500:
             return $num
@@ -47,7 +47,7 @@ problem 13:
     const nums = util.slurpAsset("p13.txt").splitLines()
     var sum = 0
     for num in nums:
-        sum += str.parseInt($(num[0..11]))
+        sum += ($num[0..11]).parseInt
     return ($sum)[0..9]
 
 # Used in problem 14
@@ -101,11 +101,11 @@ problem 15:
 # SOLVED
 # Method: Use bignum implementation
 problem 16:
-    var num = 1.toBignum()
+    var num = 1.toBignum
     var sum = 0
     for i in 1..1000:
         num *= 2
-    for i in num.digits():
+    for i in num.digits:
         sum += i
     return $sum
 
@@ -137,7 +137,7 @@ proc letterize(x: int): string =
         of 70..79: "seventy" & letterize(x mod 10)
         of 80..89: "eighty"  & letterize(x mod 10)
         of 90..99: "ninety"  & letterize(x mod 10)
-        of 100..999: letterize(toInt(math.floor(x / 100))) &
+        of 100..999: (x / 100).floor.toInt.letterize &
             (if x mod 100 == 0: "hundred" else: "hundredand") &
             letterize(x mod 100)
         of 1000: "onethousand"
@@ -149,7 +149,7 @@ proc letterize(x: int): string =
 problem 17:
     var totalLen = 0
     for i in 1..1000:
-        totalLen += letterize(i).len
+        totalLen += i.letterize.len
     return $totalLen
 
 proc findPath(pyramid: TableRef[Point, int], memo: TableRef[Point, int], coords: Point): int =
@@ -176,7 +176,7 @@ problem 18:
     for y in 0..(pyramidLines.high):
         let nums = pyramidLines[y].split()
         for x in 0..(nums.high):
-            pyramid[(x, y)] = str.parseInt(nums[x])
+            pyramid[(x, y)] = nums[x].parseInt
     echo pyramid[(0, 75)]
     return $findPath(pyramid, newTable[Point, int](), (0, 0))
 
@@ -205,10 +205,10 @@ problem 19:
 # SOLVED
 # Method: Use bignum implementation
 problem 20:
-    var num = 1.toBignum()
+    var num = 1.toBignum
     var sum = 0
     for n in 1..100:
         num *= n
-    for n in num.digits():
+    for n in num.digits:
         sum += n
     return $sum
