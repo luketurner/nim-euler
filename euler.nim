@@ -1,7 +1,7 @@
 from os import commandLineParams
 from parseutils import parseInt
 
-from core import runProblem, isProblemDefined
+from util import runProblem, isProblemDefined
 
 include problems
 
